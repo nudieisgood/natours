@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/nudieisgood/natours/issues"
   },
-  "homepage": "https://github.com/nudieisgood/natours#readme"
+  "homepage": "https://github.com/nudieisgood/natours#readme",
+  "devDependencies": {
+    "node-sass": "^9.0.0"
+  }
 }
