@@ -1,0 +1,19 @@
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+/* default: 16px (100%) 
+我們在最小螢幕時希望是10px => 62.5% 
+不直接帶入10 px 是因為每個瀏覽器的default 不一樣*/
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+  padding: 30px;
+}
