@@ -8,7 +8,7 @@
     display: inline-block;
     border-radius: 10rem;
     transition: all 0.5s;
-    color: $color-black;
+    // color: $color-black;
 
     position: relative;
   }
@@ -34,9 +34,19 @@
 
   &--white {
     background-color: $color-white;
+    color: $color-grey-dark;
 
     &::after {
       background-color: $color-white;
+    }
+  }
+
+  &--green {
+    background-color: $color-primary;
+    color: $color-white;
+
+    &::after {
+      background-color: $color-primary;
     }
   }
 
@@ -80,13 +90,13 @@
   &:hover {
     background-color: $color-primary;
     color: $color-white;
-    box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+    box-shadow: $shadow-3;
     transform: translateX(-2px);
   }
 
   &:active {
     /* Y是根據原始位置 */
     transform: translateY(0);
-    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+    box-shadow: $shadow-4;
   }
 }
