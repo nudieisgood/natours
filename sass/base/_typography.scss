@@ -18,10 +18,13 @@ body {
     letter-spacing: 3.5rem;
 
     animation-name: moveInLeft;
-
     animation-duration: 2s;
-
     animation-timing-function: ease-out;
+
+    @include respond(sm) {
+      letter-spacing: 1rem;
+      font-size: 5rem;
+    }
   }
   &--sub {
     display: block;
@@ -30,6 +33,10 @@ body {
     letter-spacing: 1.75rem;
 
     animation: moveInRight 2s ease-out;
+
+    @include respond(sm) {
+      letter-spacing: 0.5rem;
+    }
   }
 }
 
@@ -37,7 +44,7 @@ body {
   display: inline-block;
   font-size: 3.5rem;
   text-transform: uppercase;
-  font-size: 700;
+  font-weight: 700;
   letter-spacing: 2px;
   //做一個漸層 bg
   background-image: linear-gradient(
@@ -49,8 +56,15 @@ body {
   -webkit-background-clip: text;
   //將文字透明代表 bg 漸層顯現
   color: transparent;
-
   transition: all 0.5s;
+
+  @include respond(md) {
+    font-size: 3rem;
+  }
+
+  @include respond(sm) {
+    font-size: 2rem;
+  }
 
   &:hover {
     transform: skewY(2deg) skewX(15deg) scale(1.1);

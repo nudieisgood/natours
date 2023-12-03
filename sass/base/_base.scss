@@ -10,10 +10,35 @@
 我們在最小螢幕時希望是10px => 62.5% 
 不直接帶入10 px 是因為每個瀏覽器的default 不一樣*/
 html {
-  font-size: 62.5%;
+  font-size: 62.5%; //1rem = 10px; 10px/16px = 62.5%
+
+  //media 不會增加任何的權重 就是看order
+  //當螢幕小於 lg 時 在這邊有宣告的
+  // respond(md) respond(lg) 跟62.5
+  //都會被apply 此時就會看order, 故我們要把 md
+  //放在 lg 後面 否則 ex:500px 都小於 lg md
+  // 62.5%  56.25% 50%都會套用且會使用order 最後一個
+  //故我們要將越小的query放在後面來覆蓋大的query
+  @include respond(lg) {
+    font-size: 56.25%; //1rem = 9px, 56.25%
+  }
+  //我們想要螢幕小於 sm / md 時套用
+  // font-size: 50%; 只需要在md寫上
+  // 因為sm 也是小於 md
+  @include respond(md) {
+    font-size: 50%; //1rem = 8px, 50%
+  }
+
+  @include respond(xl) {
+    font-size: 75%;
+  }
 }
 
 body {
   box-sizing: border-box;
-  padding: 30px;
+  padding: 3rem;
+
+  @include respond(md) {
+    padding: 0;
+  }
 }

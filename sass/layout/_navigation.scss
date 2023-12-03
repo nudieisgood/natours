@@ -1,0 +1,174 @@
+.navigation {
+  &__checkbox {
+    //把預設的checkbox hidden
+    //fake 一個btn for label 當作 checkbox btn
+    display: none;
+  }
+
+  //toogle的小圓點
+  &__btn {
+    //一個比__background出使小圓點大一點的白圓形鈕
+    height: 7rem;
+    width: 7rem;
+    border-radius: 50%;
+    position: fixed;
+    top: 6rem;
+    right: 6rem;
+    z-index: 2000;
+    background-color: $color-white;
+    box-shadow: $shadow-4;
+
+    text-align: center;
+    cursor: pointer;
+
+    @include respond(md) {
+      top: 4rem;
+      right: 4rem;
+    }
+    @include respond(sm) {
+      top: 3rem;
+      right: 3rem;
+    }
+  }
+  //toogle的小圓點nav展開後的背景特效
+  &__background {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    position: fixed;
+    top: 6.5rem;
+    right: 6.5rem;
+    z-index: 1000;
+    //radial-gradient 由中間向外擴的 gradient
+    background-image: radial-gradient(
+      $color-primary-light,
+      $color-primary-dark
+    );
+    transition: transform 0.8s;
+
+    @include respond(md) {
+      top: 4.5rem;
+      right: 4.5rem;
+    }
+    @include respond(sm) {
+      top: 3.5rem;
+      right: 3.5rem;
+    }
+  }
+  &__nav {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1500;
+
+    opacity: 0;
+    width: 0;
+
+    transition: all 0.8s;
+  }
+  &__list {
+    //以__nav為parent 因為nav 有fixed
+    @include centerXY;
+
+    list-style: none;
+    text-decoration: none;
+  }
+  &__item {
+    margin: 1rem;
+  }
+  &__link {
+    &:link,
+    &:visited {
+      display: inline-block;
+      font-size: 3rem;
+      font-weight: 300;
+      padding: 1rem 2rem;
+      color: $color-white;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all 0.4s;
+
+      background-image: linear-gradient(
+        120deg,
+        transparent 0%,
+        transparent 50%,
+        $color-white 50%
+      );
+      //把整個背景把整個背景放大 原本白色的部分會被擠出lelement
+      //在利用hover 後 background-position: 100%; 復原
+      background-size: 230%;
+    }
+    &:hover,
+    &:active {
+      // background-size: 100%;
+      background-position: 100%;
+      color: $color-primary;
+      transform: translateX(1rem);
+    }
+  }
+
+  //FUNC
+  // ~ general兄弟selector 不會限定next one sib
+  &__checkbox:checked ~ &__background {
+    transform: scale(50);
+  }
+
+  &__checkbox:checked ~ &__nav {
+    opacity: 1;
+    width: 100%;
+  }
+
+  //ICON
+  &__icon {
+    position: relative;
+    margin-top: 3.5rem;
+    &,
+    &::before,
+    &::after {
+      //inline-block會根據parent的寬度自動wrap
+      //故這邊會變成三條block 排列
+      display: inline-block;
+      width: 3rem;
+      height: 2px;
+      background-color: $color-grey-dark-3;
+    }
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+
+      transition: all 0.2s;
+    }
+
+    &::before {
+      top: -0.8rem;
+    }
+
+    &::after {
+      top: 0.8rem;
+    }
+  }
+
+  &__btn:hover &__icon::before {
+    top: -1rem;
+  }
+
+  &__btn:hover &__icon::after {
+    top: 1rem;
+  }
+
+  &__checkbox:checked + &__btn &__icon {
+    //將中間的透明
+    background-color: transparent;
+    &::before {
+      top: 0;
+      transform: rotate(135deg);
+    }
+    &::after {
+      top: 0;
+      transform: rotate(-135deg);
+    }
+  }
+}

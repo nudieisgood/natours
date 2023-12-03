@@ -1,0 +1,115 @@
+.popup {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background-color: rgba($color-black, 0.3);
+  transition: all 0.3s;
+
+  opacity: 0;
+  visibility: hidden;
+  overflow: scroll;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+
+  &__content {
+    @include centerXY;
+
+    width: 75%;
+
+    background-color: $color-white;
+    box-shadow: $shadow-2;
+    border-radius: 3px;
+    overflow: hidden;
+
+    display: flex;
+
+    //做一個pop出現時popup放大出現的效果
+    //以及fade效果=>opacity
+    //先將原始popup scale down
+    //由於centerXY; 裡面有用到transform
+    //這邊要將 centerXY 有得效果重寫一次
+    transition: all 0.5s;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2);
+
+    @include respond(lg) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  //當網址有 #popup 時 .popup apply
+  //.popup:target{...}
+  &:target {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  //當網址有 #popup 時 .popup 裡的 &__content apply
+  &:target &__content {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  &__close {
+    &:link,
+    &:visited {
+      color: $color-grey-dark;
+      position: absolute;
+      top: 2.5rem;
+      right: 2.5rem;
+      font-size: 3rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      line-height: 1;
+    }
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &__left {
+    width: 34%;
+    @include respond(lg) {
+      width: 100%;
+      display: flex;
+    }
+  }
+  &__right {
+    width: 66%;
+    padding: 3rem 5rem;
+    @include respond(lg) {
+      width: 100%;
+      padding: 2rem 4rem;
+      position: relative;
+    }
+  }
+  &__img {
+    //沒有block 照片並排時會有gap
+    display: block;
+    width: 100%;
+    @include respond(lg) {
+      width: 50%;
+    }
+  }
+  &__text {
+    font-size: 1.4rem;
+    margin-bottom: 4rem;
+
+    //將text div 分成column呈現
+    column-count: 2;
+    column-gap: 4rem;
+    column-rule: 1px solid $color-grey-light-2;
+
+    hyphens: auto;
+
+    @include respond(md) {
+      font-size: 1.2rem;
+    }
+  }
+}

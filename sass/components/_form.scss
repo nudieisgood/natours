@@ -1,0 +1,118 @@
+.form {
+  &__group:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  &__input {
+    //input 要手動寫font-family / color 等text相關
+    font-family: inherit;
+    color: inherit;
+    font-size: 1.5rem;
+    padding: 1.5rem 2rem;
+    border-radius: 2px;
+    background-color: rgba($color-white, 0.5);
+    border: none;
+    //給一個透明border 防止focus時input 跳動
+    border-bottom: 3px solid transparent;
+    width: 80%;
+    display: block;
+    transition: all 0.3s;
+
+    //當input invalid時 顯示此
+    &:focus:invalid {
+      border-bottom: 3px solid $color-secondary-dark;
+    }
+
+    //input被點擊時
+    &:focus {
+      //取消focus時的藍邊
+      outline: none;
+      //但還是要給效果告知使用者
+      box-shadow: $shadow-3;
+      border-bottom: 3px solid $color-primary;
+    }
+    //改變placeholder color
+    &::-webkit-input-placeholder {
+      color: $color-grey-dark-2;
+    }
+
+    @include respond(md) {
+      width: 100%;
+    }
+  }
+
+  &__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    margin-top: 0.7rem;
+    display: block;
+
+    transition: all 0.3s;
+  }
+
+  //label 和 input 是兄弟element
+  //+ 會選擇 "下" 一個兄弟el
+  //placeholder-shown ＝> 當input
+  //有 placeholder(代表還沒輸入字)時, apply此
+  &__input:placeholder-shown + &__label {
+    //拿來達成 transition fade 效果
+    opacity: 0;
+    //拿來達成 block hidden 效果
+    visibility: hidden;
+    transform: translateY(-4rem);
+  }
+
+  &__radio-group {
+    width: 49%;
+    display: inline-block;
+
+    @include respond(md) {
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  &__radio-input {
+    display: none;
+  }
+
+  &__radio-label {
+    font-size: $default-font-size;
+    cursor: pointer;
+    position: relative;
+    padding-left: 4.5rem;
+  }
+
+  &__radio-btn {
+    height: 3rem;
+    width: 3rem;
+    border: 5px solid $color-primary;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: -0.4rem;
+
+    &::after {
+      content: "";
+      display: block;
+      height: 1.3rem;
+      width: 1.3rem;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: $color-primary;
+
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    // ~ 兄弟選擇器 當input checked後 兄弟選擇器選擇 label 在選擇 child btn
+    &__radio-input:checked ~ &__radio-label &__radio-btn::after {
+      opacity: 1;
+    }
+  }
+}

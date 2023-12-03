@@ -9,10 +9,14 @@
   font-size: $default-font-size;
   transform: skewX(-12deg);
 
-  // 這裡用此方法只有__text能apply, 因為__shape自己有
-  // transform 故我們要手動對 __text _shape加入 skew
-  & > * {
-    transform: skewX(12deg);
+  @include respond(md) {
+    width: 100%;
+    padding: 4rem;
+    padding-left: 6rem;
+  }
+
+  @include respond(sm) {
+    transform: skewX(0);
   }
 
   &__shape {
@@ -25,7 +29,21 @@
     shape-outside: circle(50% at 50% 50%);
     //將shape 切成圓形
     clip-path: circle(50% at 50% 50%);
+    // 這裡用此方法只有__text能apply, 因為__shape自己有
+    // transform 故我們要手動對 __text _shape加入 skew
     transform: translateX(-3rem) skewX(12deg);
+
+    @include respond(sm) {
+      transform: translateX(-3rem) skewX(0);
+    }
+  }
+
+  &__text {
+    transform: skewX(12deg);
+
+    @include respond(sm) {
+      transform: skewX(0);
+    }
   }
 
   &__img {

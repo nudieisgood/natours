@@ -9,6 +9,15 @@
   //.row::not(:last-child){}
   &:not(:last-child) {
     margin-bottom: $gutter-vertical;
+
+    @include respond(md) {
+      margin-bottom: $gutter-vertical-sm;
+    }
+  }
+
+  @include respond(md) {
+    max-width: 50rem;
+    padding: 0 3rem;
   }
 
   @include clearfix;
@@ -18,8 +27,19 @@
   [class^="col-"] {
     float: left;
 
+    @include respond(md) {
+      //小於 900 px 時就是變成 one col
+      width: 100% !important;
+    }
+
     &:not(:last-child) {
       margin-right: $gutter-horizontal;
+
+      @include respond(md) {
+        margin-right: 0;
+        //col間加上gap
+        margin-bottom: $gutter-vertical-sm;
+      }
     }
   }
 
